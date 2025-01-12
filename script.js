@@ -46,16 +46,39 @@ function takeCoins(count) {
 function computerTurn() {
 	// 简单策略：尽可能让剩余硬币为1，确保赢得游戏
 	let cpuTake;
-	if (remainingCoins % 3 === 0) {
-		cpuTake = 2;
-	} else {
-		cpuTake = 1;
+	// if (remainingCoins % 3 === 0) {
+	// 	cpuTake = 2;
+	// } else {
+	// 	cpuTake = 1;
+	// }
+	switch(remainingCoins){
+		case 7:
+			cpuTake = 1;
+			break;
+		case 6:
+			cpuTake = 2;
+			break;
+		case 5:
+			cpuTake = 2;
+			break;
+		case 4:
+			cpuTake = 1;
+			break;
+		case 3:
+			cpuTake = 1;
+			break;
+		case 2:
+			cpuTake = 2;
+			break;
+		case 1:
+			cpuTake = 1;
+			break;
 	}
 
-	// 确保不拿超过剩余硬币
-	if (cpuTake > remainingCoins) {
-		cpuTake = remainingCoins;
-	}
+	// // 确保不拿超过剩余硬币
+	// if (cpuTake > remainingCoins) {
+	// 	cpuTake = remainingCoins;
+	// }
 
 	// 模拟电脑思考时间
 	setTimeout(() => {
@@ -63,7 +86,7 @@ function computerTurn() {
 		updateDisplay();
 		messageElement.textContent = `电脑拿了 ${cpuTake} 枚硬币。`;
 		checkGameOver(false);
-	}, 1000);
+	}, 100);
 }
 
 // 重置游戏
