@@ -1,3 +1,4 @@
+/* 基础样式 */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f8ff;
@@ -6,6 +7,8 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+    padding: 10px; /* 增加内边距，防止内容紧贴屏幕边缘 */
+    box-sizing: border-box; /* 确保padding和border被包含在元素总宽度和高度内 */
 }
 
 .game-container {
@@ -15,14 +18,21 @@ body {
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%; /* 防止在小屏幕上超出视口 */
+    box-sizing: border-box;
 }
 
 h1 {
     color: #4caf50;
+    font-size: 2em; /* 使用相对字体大小 */
 }
 
 .buttons {
     margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* 允许按钮在小屏幕上换行 */
+    justify-content: center;
 }
 
 button {
@@ -30,11 +40,14 @@ button {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 16px;
+    margin: 5px; /* 减小外边距以适应小屏幕 */
+    font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    flex: 1 1 auto; /* 让按钮在容器中灵活调整大小 */
+    max-width: 150px; /* 限制按钮最大宽度，防止过宽 */
+    box-sizing: border-box;
 }
 
 button:hover {
@@ -42,7 +55,57 @@ button:hover {
 }
 
 #message {
-    font-size: 18px;
+    font-size: 1.125em;
     color: #d9534f;
     margin-top: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 15px 20px;
+    }
+
+    h1 {
+        font-size: 1.75em;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.95em;
+        max-width: 130px;
+    }
+
+    #message {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .game-container {
+        padding: 10px 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+        max-width: none;
+        margin: 5px 0;
+    }
+
+    #message {
+        font-size: 0.95em;
+    }
 }

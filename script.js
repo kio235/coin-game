@@ -1,11 +1,28 @@
-// 初始化剩余硬币数
-let remainingCoins = 8;
+
+// let p1First = true;
+// let rounds = 0;
+// let lastTake = 0;
+
+const COIN_COUNT_MIN = 12;
+const COIN_COUNT_MAX = 24;
 
 // 获取 DOM 元素
 const coinCountElement = document.getElementById("coin-count");
 const takeOneBtn = document.getElementById("take-one");
 const takeTwoBtn = document.getElementById("take-two");
+const resetBtn = document.getElementById("reset");
 const messageElement = document.getElementById("message");
+
+function getRandomInt(min, max) {
+	// 确保 min 是范围的最小值，max 是范围的最大值
+	min = Math.ceil(min); // 向上取整，确保是整数
+	max = Math.floor(max); // 向下取整，确保是整数
+	// 生成 [min, max] 范围内的随机整数
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let totalCoins = getRandomInt(COIN_COUNT_MIN, COIN_COUNT_MAX);
+let remainingCoins = totalCoins;
 
 // 更新界面显示
 function updateDisplay() {
@@ -46,39 +63,17 @@ function takeCoins(count) {
 function computerTurn() {
 	// 简单策略：尽可能让剩余硬币为1，确保赢得游戏
 	let cpuTake;
-	// if (remainingCoins % 3 === 0) {
-	// 	cpuTake = 2;
-	// } else {
-	// 	cpuTake = 1;
-	// }
-	switch(remainingCoins){
-		case 7:
+	if (remainingCoins >= 2) {
+		if ((remainingCoins - 1) % 3 === 0) {
 			cpuTake = 1;
-			break;
-		case 6:
+		} else if ((remainingCoins - 2) % 3 === 0) {
 			cpuTake = 2;
-			break;
-		case 5:
-			cpuTake = 2;
-			break;
-		case 4:
-			cpuTake = 1;
-			break;
-		case 3:
-			cpuTake = 1;
-			break;
-		case 2:
-			cpuTake = 2;
-			break;
-		case 1:
-			cpuTake = 1;
-			break;
+		} else {
+			cpuTake = Math.random() < 0.5 ? 1 : 2;
+		}
+	} else {
+		cpuTake = remainingCoins;
 	}
-
-	// // 确保不拿超过剩余硬币
-	// if (cpuTake > remainingCoins) {
-	// 	cpuTake = remainingCoins;
-	// }
 
 	// 模拟电脑思考时间
 	setTimeout(() => {
@@ -91,7 +86,8 @@ function computerTurn() {
 
 // 重置游戏
 function resetGame() {
-	remainingCoins = 8;
+	totalCoins = getRandomInt(COIN_COUNT_MIN, COIN_COUNT_MAX);
+	remainingCoins = totalCoins;
 	updateDisplay();
 	messageElement.textContent = "";
 	takeOneBtn.disabled = false;
@@ -101,6 +97,7 @@ function resetGame() {
 // 添加事件监听
 takeOneBtn.addEventListener("click", () => takeCoins(1));
 takeTwoBtn.addEventListener("click", () => takeCoins(2));
+resetBtn.addEventListener("click", () => resetGame());
 
 // 初始化游戏显示
 updateDisplay();
