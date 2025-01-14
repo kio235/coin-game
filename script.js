@@ -23,7 +23,7 @@ restartBtn.addEventListener("click", startGame);
 // 初始化/重新开始游戏
 function startGame() {
 	// 随机生成硬币数 (12~24之间)
-	coinCount = Math.floor(Math.random() * 15) + 12;
+	coinCount = Math.floor(Math.random() * 13) + 12;
 	coinCountSpan.textContent = coinCount;
 
 	// 重置游戏状态
