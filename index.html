@@ -1,22 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>硬币游戏</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="game-container">
+    <div class="container">
         <h1>硬币游戏</h1>
-        <p>剩余硬币：<span id="coin-count"></span></p>
-        <div class="buttons">
-            <button id="take-one">拿一枚硬币</button>
-            <button id="take-two">拿两枚硬币</button>
-            <button id="reset">重置游戏</button>
+        <div class="info">
+            <p>游戏规则：玩家与电脑轮流从硬币堆里拿硬币，每次可以拿1枚或2枚，拿到最后一枚硬币的人获胜。</p>
         </div>
-        <p id="message"></p>
+
+        <!-- 显示当前硬币数量 -->
+        <div class="info">
+            <h2>本场比赛的硬币数：<span id="coinCount">--</span></h2>
+        </div>
+
+        <!-- 选择先手或后手 -->
+        <div class="choice">
+            <label>
+                <input type="radio" name="turn" value="first">
+                我先手
+            </label>
+            <label>
+                <input type="radio" name="turn" value="second">
+                我后手
+            </label>
+        </div>
+        <div class="buttons">
+            <button id="confirmTurn">确认选择</button>
+        </div>
+
+        <!-- 操作按钮区 -->
+        <div class="buttons">
+            <button id="takeOne" disabled>拿一枚</button>
+            <button id="takeTwo" disabled>拿两枚</button>
+            <button id="restart" class="restart-btn">重新开始游戏</button>
+        </div>
+
+        <!-- 日志输出区 -->
+        <h3>操作记录</h3>
+        <div id="log"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
